@@ -79,7 +79,11 @@ def main():
         print(f"Отсортированные ребра: {sorted_edges}")
 
         # Построение минимального остовного дерева
-        mst_edges = find_minimum_spanning_tree(edges)
+        choice = int(input("Выберите метод построения дерева (1 - метод Прима, 2 - метод Краскала)"))
+        if choice == 1:
+            mst_edges = find_minimum_spanning_tree(edges)
+        else:
+            mst_edges = find_minimum_spanning_tree(edges)
 
         # Создание результирующей матрицы
         mst_matrix = processor.create_mst_matrix(mst_edges)

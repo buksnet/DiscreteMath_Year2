@@ -61,6 +61,48 @@ def find_minimum_spanning_tree(edges: List[Tuple[int, int, int]]) -> List[Tuple[
     return mst_edges
 
 
+def find_minimum_spanning_tree_primm(edges: List[Tuple[int, int, int]]) -> List[Tuple[int, int, int]]:
+    """Находит минимальное остовное дерево алгоритмом прима"""
+    if not edges:
+        return []
+
+    # Создаем словарь смежности для быстрого доступа к рёбрам из вершины
+    graph = {}
+    for u, v, weight in edges:
+        if u not in graph:
+            graph[u] = []
+        if v not in graph:
+            graph[v] = []
+        graph[u].append((v, weight))
+        graph[v].append((u, weight))
+
+    # Начинаем с первой вершины
+    start_vertex = edges[0][0]
+    connected_vertices = {start_vertex}
+    mst_edges = []
+
+    # Пока не подключили все вершины
+    while len(connected_vertices) < len(graph):
+        min_edge = None
+        min_weight = float('inf')
+
+        # Ищем минимальное ребро, соединяющее подключенные и неподключенные вершины
+        for vertex in connected_vertices:
+            for neighbor, weight in graph[vertex]:
+                if neighbor not in connected_vertices and weight < min_weight:
+                    min_weight = weight
+                    min_edge = (vertex, neighbor, weight)
+
+        if min_edge:
+            u, v, weight = min_edge
+            mst_edges.append(min_edge)
+            connected_vertices.add(v)
+        else:
+            break  # Граф несвязный
+
+    return mst_edges
+
+
 def pick_file_from_matrix_mass():
     print("Выберите файл, который вы хотели бы использовать для тестирования программы (стандартный - g22.txt):\n")
     all_files = list(os.listdir('Matrix_Mass'))

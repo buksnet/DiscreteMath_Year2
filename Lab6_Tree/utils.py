@@ -62,7 +62,7 @@ def find_minimum_spanning_tree(edges: List[Tuple[int, int, int]]) -> List[Tuple[
 
 
 def pick_file_from_matrix_mass():
-    print("Выберите файл, который вы хотели бы использовать для тестирования программы (стандартный - :\n")
+    print("Выберите файл, который вы хотели бы использовать для тестирования программы (стандартный - g22.txt):\n")
     all_files = list(os.listdir('Matrix_Mass'))
     for i, filename in enumerate(os.listdir('Matrix_Mass')):
         print(f"    [{i+1}]: {filename}")
